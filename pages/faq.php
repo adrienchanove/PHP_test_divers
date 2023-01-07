@@ -1,3 +1,15 @@
+<?php
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '\ini.php';
+$acceptedAccount =
+[
+    'adrien' => 'adrien',
+    'admin' => 'admin'
+];
+
+Auth::check($acceptedAccount, 'FAQ');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,5 +20,6 @@
 </head>
 <body>
     necessite un compte et tu dois etre adrien pour y acceder
+    Bravo tu as reussi a acceder a la page
 </body>
 </html>

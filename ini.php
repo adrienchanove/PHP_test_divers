@@ -7,8 +7,14 @@
  */
 
 
-// include ini.php
-include_once $_SERVER['DOCUMENT_ROOT']."\ini.php";
+// include ini.php a ajouter a chaque page
+// include_once $_SERVER['DOCUMENT_ROOT']."\ini.php";
+
+// Start the session if it hasn't already been started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 // autoloader
 spl_autoload_register(function ($class) {

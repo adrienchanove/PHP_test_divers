@@ -1,3 +1,8 @@
+<?php
+// include the config file
+require_once $_SERVER['DOCUMENT_ROOT']."/ini.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +15,11 @@
     <header>
         <h1>Menu principale</h1>
         <!-- login link-->
-        <a href="login.php">Login</a>
+        <?php if (Auth::isLogged()) : ?>
+            <a href="logout.php">Logout|<?= Auth::getUsername()?></a>
+        <?php else : ?>
+            <a href="login.php?rfn=Menu+principal&rf=/">Login</a>
+        <?php endif; ?>
 
     </header>
     <h1>Menu principale</h1>
