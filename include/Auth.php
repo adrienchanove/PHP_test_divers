@@ -5,15 +5,14 @@ class Auth
 {
     public static function login($username, $password)
     {
-        // Get data from login.ini
-        $jsonIni = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "\login.ini");
-        $users = json_decode($jsonIni, true);
-        if (isset($users[$username]) && $users[$username]['password'] == $password) {
+        $user = User::getByUsername($username);
+        if (is_null($user)) {
+            return false;
+        }
+        if ($user->checkPassword($password)) {
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
             return true;
-        } else {
-            return false;
         }
     }
 
@@ -39,9 +38,9 @@ class Auth
         if ($refererName == '') {
             $refererName =  $referer;
         }
-        
+
         if (!self::isLogged()) {
-            header("location: /login.php?rfn=" . $refererName. "&rf=" . $referer);
+            header("location: /login.php?rfn=" . $refererName . "&rf=" . $referer);
             exit;
         } else {
             if (!isset($acceptedAccount[self::getUsername()])) {

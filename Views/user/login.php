@@ -1,59 +1,19 @@
-<?php
-// Page de connexion
-
-// Include ini.php file
-require_once $_SERVER['DOCUMENT_ROOT']."/ini.php";
-
-
-
-// Check if the user is logged in
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    $_SESSION['loggedin'] = false;
-}
-
-// Get referer
-$referer =  $_GET['rf']?? '/';
-
-// Get referer name
-$refererName = $_GET['rfn']?? $refer;
-
-
-// If the user is logged in, redirect to the home page
-if ($_SESSION['loggedin'] == true) {
-    header("location: /");
-    exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Get data from the form
-    $username = $_POST['username']?? '';
-    $password = $_POST['password']?? '';
-
-    // Check if the user is logged in
-    if (Auth::login($username, $password)) {
-        header("location: $referer");
-        exit;
-    } else {
-        $error = "Nom d'utilisateur ou mot de passe incorrect";
-    }
-}
-
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
+
 <body>
     <header>
-        <h1>Login pour <?= $refererName?></h1>
-        <h2>Lien : <?= $referer ?></h2>
+        <h1>Login</h1>
     </header>
-    
-    <form  method="post">
+
+    <form method="post">
         <label for="username">Nom d'utilisateur</label>
         <input type="text" name="username" id="username">
         <label for="password">Mot de passe</label>
@@ -65,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php endif; ?>
 
     <style>
-
         body {
             margin: 0;
             padding: 0;
@@ -91,9 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             width: 300px;
             margin: 0 auto;
         }
+
         form label {
             margin-top: 10px;
         }
+
         form input {
             margin-top: 5px;
         }
@@ -113,4 +74,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     </style>
 </body>
+
 </html>

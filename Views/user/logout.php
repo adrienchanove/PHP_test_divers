@@ -1,7 +1,7 @@
 <?php
 // LOGOUT.PHP
 // Include ini.php file
-require_once $_SERVER['DOCUMENT_ROOT']."/ini.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . DS . "ini.php";
 
 // Check if the user is logged in
 if (Auth::isLogged()) {
