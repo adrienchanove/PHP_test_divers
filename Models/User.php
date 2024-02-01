@@ -4,24 +4,15 @@
  */
 class User extends Model
 {
-    private $id;
+    public $id;
     public $username;
-    private $password;
+    public $password;
 
     public function __construct() {
-        $id = null;
+        $this->id = null;
     }
 
-    static public function verifySql()
-    {
-        $bdd = new Bdd();
-        $sql = "CREATE TABLE IF NOT EXISTS User ( 
-            id            INTEGER         PRIMARY KEY AUTOINCREMENT,
-            username         VARCHAR( 250 ),
-            password       VARCHAR( 250 )
-        );";
-        $bdd->execute($sql);
-    }
+    
     
     public function save()
     {
@@ -53,7 +44,7 @@ class User extends Model
 
     public function checkPassword($password)
     {
-        return password_verify($password, $this->password);
+        return $password == $this->password;
     }
    
 }

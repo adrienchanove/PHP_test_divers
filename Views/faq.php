@@ -10,7 +10,7 @@
 
 <body>
     <p>
-        Nécessite un compte et tu dois etre adrien pour y acceder
+        Nécessite un compte pour y acceder
         <br>
         Bravo tu as reussi a acceder a la page
     </p>

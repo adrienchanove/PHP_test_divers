@@ -10,7 +10,7 @@
 
 <body>
     <header>
-        <h1>Login</h1>
+        <h1>Register</h1>
     </header>
 
     <form method="post">
@@ -18,11 +18,10 @@
         <input type="text" name="username" id="username">
         <label for="password">Mot de passe</label>
         <input type="password" name="password" id="password">
-        <a href="/register">S'enregistrer</a>
-        <input type="submit" value="Se connecter">
+        <input type="submit" value="S'enregistrer">
     </form>
-    <?php if (isset($data['error'])) : ?>
-        <p class="error"><?php echo $data['error']; ?></p>
+    <?php if (isset($error)) : ?>
+        <p class="error"><?php echo $error; ?></p>
     <?php endif; ?>
 
     <style>

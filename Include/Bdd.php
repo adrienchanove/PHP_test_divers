@@ -5,7 +5,7 @@
  * Connect to SQLite database
  */
 
-include_once ROOT_CONF . 'DB.php';
+//include_once ROOT_CONF . 'DB.php';
 
 class Bdd
 {

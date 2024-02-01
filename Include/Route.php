@@ -46,6 +46,14 @@ class Route
         if (!$found) {
             view('404');
         }else{
+
+            if (isset($params['auth']) && $params['auth'] == true) {
+                if (!Auth::isLogged()) {
+                    view('403');
+                    exit;
+                }
+            }
+
             $controllerName = ucfirst($controller.'Controller');
             try {
                 $controller = new $controllerName();

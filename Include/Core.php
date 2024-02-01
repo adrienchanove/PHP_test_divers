@@ -64,8 +64,7 @@ function view($view, $data = array())
 // Include routes
 require_once(ROOT_CONF . 'routes.php');
 
-// Verification of the tables
-User::verifySql();
+
 
 // Launch router
 Route::launch();

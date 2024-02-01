@@ -34,7 +34,7 @@ class Model
         return $listeInstance;
     }
 
-    private function arrayToEntity($array)
+    static private function arrayToEntity($array)
     {
         $table = get_called_class();
         $instance = new $table();
