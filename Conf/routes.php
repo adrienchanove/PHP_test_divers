@@ -19,4 +19,4 @@ Route::add('profile', 'user', 'profile',['auth' => true]);
 Route::add('profile/edit', 'user', 'edit',['auth' => true]);
 Route::add('profile/delete', 'user', 'delete',['auth' => true]);
 Route::add('admin', 'user', 'admin',['auth' => true]);
-Route::add('admin/users', 'user', 'admin_users',['auth' => true]);
+Route::add('admin/bdd', 'user', 'admin_bdd',['auth' => true]);

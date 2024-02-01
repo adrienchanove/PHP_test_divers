@@ -35,4 +35,14 @@ class Bdd
         $stmt->execute($params);
         return $stmt;
     }
+
+    /**
+     * resetDatabase
+     */
+    public function resetDatabase()
+    {
+        // load file resetDatabase.sql
+        $sql = file_get_contents(ROOT_CONF . 'resetDatabase.sql');
+        $this->pdo->exec($sql);
+    }
 }

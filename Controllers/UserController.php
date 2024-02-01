@@ -102,5 +102,34 @@ class UserController {
             view('faq');
         }
 
+        /**
+         * Page admin
+         */
+        public function admin()
+        {
+            // Check auth
+            Auth::check(['admin' => 'admin']);
+            // open view
+            view('admin/admin');
+        }
+
+        /**
+         * Page admin_bdd
+         */
+        public function admin_bdd()
+        {
+            // Check auth
+            Auth::check(['admin' => 'admin']);
+            // Check get
+            if (isset($_GET['reset'])) {
+                $bdd = new Bdd();
+                $bdd->resetDatabase();
+                header("location: /admin/bdd");
+                exit;
+            }
+            // open view
+            view('admin/db');
+        }
+
 
 }
