@@ -89,7 +89,7 @@ class User implements Model
     static function getAll()
     {
         $bdd = new Bdd();
-        $sql = "SELECT * FROM User JOIN userGroup ON User.id = userGroup.user_id";
+        $sql = "SELECT * FROM User JOIN UserGroupe ON User.id = UserGroupe.user_id";
         $stmt = $bdd->execute($sql);
         $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if ($users == false) {
