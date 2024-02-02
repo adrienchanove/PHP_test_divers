@@ -1,0 +1,2 @@
+# Ignore database.sqlite in Conf folder
+/Conf/database.sqlite
