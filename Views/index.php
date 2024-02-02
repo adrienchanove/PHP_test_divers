@@ -1,8 +1,3 @@
-<?php
-// include the config file
-// require_once $_SERVER['DOCUMENT_ROOT'] . DS . "ini.php";
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
