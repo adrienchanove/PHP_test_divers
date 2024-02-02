@@ -64,7 +64,12 @@ function view($view, $data = array())
 // Include routes
 require_once(ROOT_CONF . 'routes.php');
 
-
+// check if database exists
+if (!file_exists(ROOT_CONF . 'database.sqlite')) {
+    // create database
+    $bdd = new Bdd();
+    $bdd->resetDatabase();
+}
 
 // Launch router
 Route::launch();
