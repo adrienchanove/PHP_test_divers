@@ -106,24 +106,21 @@ class User implements Model
 
     /**
      * Get a user by its username
-     * @return array
+     * @return User
      */
     static public function getByUsername($username)
     {
         $bdd = new Bdd();
-        $sql = "SELECT * FROM User JOIN userGroup ON User.id = userGroup.user_id WHERE username = '$username'";
+        $sql = "SELECT * FROM User JOIN UserGroupe ON User.id = UserGroupe.user_id WHERE username = '$username'";
         $stmt = $bdd->execute($sql);
-        $users = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($users == false) {
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        var_dump($user);
+        if ($user == false) {
             return null;
         }
-        $listUsers = [];
-        foreach ($users as $user) {
-            $usr = new User();
-            $usr->arrayToEntity($user);
-            $listUsers[] = $usr;
-        }
-        return $listUsers;
+        $usr = new User();
+        $usr->arrayToEntity($user);
+        return $usr;
     }
 
     /**
@@ -161,5 +158,4 @@ class User implements Model
         $groupName = $stmt->fetchColumn();
         return $groupName;
     }
-   
 }

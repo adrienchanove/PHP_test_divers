@@ -44,7 +44,7 @@ class UserController {
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 $user = new User();
                 $user->username = $_POST['username'];
-                $user->setPassword($_POST['password']);
+                $user->password = $_POST['password'];
                 $user->save();
                 header("location: /login");
                 exit;
