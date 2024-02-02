@@ -84,7 +84,7 @@ class UserController {
             // Check post
             if (isset($_POST['username']) && isset($_POST['password'])) {
                 $user = User::getByUsername($_POST['username']);
-                $user->setPassword($_POST['password']);
+                $user->password = $_POST['password'];
                 $user->save();
                 header("location: /profile");
                 exit;
@@ -101,6 +101,54 @@ class UserController {
             // open view
             view('faq');
         }
+
+
+
+        /**
+         * Page message
+         */
+        public function message()
+        {
+            $data = [];
+            // get with who the user is talking 
+            $currentUser = User::getByUsername(Auth::getUsername());
+            $data['currentUser'] = $currentUser;
+
+            if (isset($_POST['content'])) {
+                $message = new Message();
+                $message->sender_id = $currentUser->id;
+                $message->receiver_id = $_POST['receiver_id'];
+                $message->message = $_POST['content'];
+                $message->save();
+                header("location: /message?receiver=" . User::getById($message->receiver_id)->username);
+                exit;
+            }
+
+            $speakingWith = Message::getWithWhoUserIsTalking($currentUser->id);
+            $data['speakingWith'] = $speakingWith;
+            $canspeakWith = [];
+            $allUsers = User::getAll();
+            foreach ($allUsers as $user) {
+                if ($user->id != $currentUser->id) {
+                    if (!in_array($user, $speakingWith)) {
+                        $canspeakWith[] = $user;
+                    }
+                }
+            }
+            $data['canspeakWith'] = $canspeakWith;
+
+
+            if (isset($_GET['receiver']))
+            {
+                $receiver = User::getByUsername($_GET['receiver']);
+                $messages = Message::getByUsersIds($currentUser->id, $receiver->id);
+                $data['messages'] = $messages;
+                $data['receiver'] = $receiver;
+            }
+            // open view
+            view('user/message', $data);
+        }
+
 
         /**
          * Page admin

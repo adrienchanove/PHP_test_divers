@@ -20,3 +20,5 @@ Route::add('profile/edit', 'user', 'edit',['auth' => true]);
 Route::add('profile/delete', 'user', 'delete',['auth' => true]);
 Route::add('admin', 'user', 'admin',['auth' => true]);
 Route::add('admin/bdd', 'user', 'admin_bdd',['auth' => true]);
+// Messages
+Route::add('message', 'user', 'message',['auth' => true]);

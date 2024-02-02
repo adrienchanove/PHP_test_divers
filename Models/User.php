@@ -54,7 +54,7 @@ class User implements Model
             $bdd = new Bdd();
             $bdd->execute($sqlInsertUser);
             $this->id = self::lastInsertId();
-            $sqlInsertUserGroup = "INSERT INTO UserGroup (user_id, group_id) VALUES ($this->id, $this->group_id)";
+            $sqlInsertUserGroup = "INSERT INTO UserGroupe (user_id, group_id) VALUES ($this->id, $this->group_id)";
             $bdd->execute($sqlInsertUserGroup);
         }
     }
@@ -67,19 +67,15 @@ class User implements Model
     static function getById($id)
     {
         $bdd = new Bdd();
-        $sql = "SELECT * FROM User JOIN userGroup ON User.id = userGroup.user_id WHERE User.id = $id";
+        $sql = "SELECT * FROM User JOIN UserGroupe ON User.id = UserGroupe.user_id WHERE User.id = $id";
         $stmt = $bdd->execute($sql);
-        $users = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($users == false) {
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user == false) {
             return null;
         }
-        $listUsers = [];
-        foreach ($users as $user) {
-            $usr = new User();
-            $usr->arrayToEntity($user);
-            $listUsers[] = $usr;
-        }
-        return $listUsers[0];
+        $usr = new User();
+        $usr->arrayToEntity($user);
+        return $usr;
     }
 
     /**
@@ -114,7 +110,7 @@ class User implements Model
         $sql = "SELECT * FROM User JOIN UserGroupe ON User.id = UserGroupe.user_id WHERE username = '$username'";
         $stmt = $bdd->execute($sql);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        var_dump($user);
+
         if ($user == false) {
             return null;
         }
@@ -153,7 +149,7 @@ class User implements Model
     public function getGroupName()
     {
         $bdd = new Bdd();
-        $sql = "SELECT Group.name FROM UserGroup INNER JOIN Group ON UserGroup.group_id = Group.id WHERE UserGroup.user_id = $this->id";
+        $sql = "SELECT Group.name FROM UserGroupe INNER JOIN Group ON UserGroupe.group_id = Group.id WHERE UserGroupe.user_id = $this->id";
         $stmt = $bdd->execute($sql);
         $groupName = $stmt->fetchColumn();
         return $groupName;

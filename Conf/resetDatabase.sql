@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS posts;
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Groupe;
 DROP TABLE IF EXISTS UserGroupe;
-DROP TABLE IF EXISTS privateMessage;
+DROP TABLE IF EXISTS Message;
 
 
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS UserGroupe (
 	group_id         INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS privateMessage ( 
+CREATE TABLE IF NOT EXISTS Message ( 
 	id            INTEGER         PRIMARY KEY AUTOINCREMENT,
 	sender_id         INTEGER,
 	receiver_id         INTEGER,
