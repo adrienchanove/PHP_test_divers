@@ -22,3 +22,7 @@ Route::add('admin', 'user', 'admin',['auth' => true]);
 Route::add('admin/bdd', 'user', 'admin_bdd',['auth' => true]);
 // Messages
 Route::add('message', 'user', 'message',['auth' => true]);
+
+
+// Test route with parameters
+Route::add('test/[id]/[nom]', 'index', 'test');

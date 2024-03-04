@@ -17,6 +17,7 @@ class Route
 
     /**
      * Launch the router
+     * It will check the current uri and call the corresponding controller and method
      */
     public static function launch()
     {
@@ -33,12 +34,17 @@ class Route
         $method = '';
         $params = array();
         $found = false;
-        foreach (self::$routes as $key => $route) {
-            if (preg_match("#^$key$#", $uri, $matches)) {
+        foreach (self::$routes as $routeUrl => $route) {
+            // 'test/[id]/[nom]'
+            $pregString = preg_replace('#\[([a-z]+)\]#', '([a-zA-Z0-9-_]+)', $routeUrl);
+
+            if (preg_match("#^$pregString$#", $uri, $matches)) {
+                // var_dump($matches);
                 $found = true;
                 $controller = $route['controller'];
                 $method = $route['method'];
                 $params = $route['params'];
+                $params['matches'] = self::matchParams($routeUrl, $matches);
                 break;
             }
         }
@@ -53,6 +59,7 @@ class Route
                     exit;
                 }
             }
+
 
             $controllerName = ucfirst($controller.'Controller');
             try {
@@ -74,5 +81,24 @@ class Route
             
         }
        
+    }
+
+    /**
+     * MatchParams
+     * Match the parameters of the route with the url
+     * @param string $routeUrl
+     * @param array $matches
+     * @return array
+     * 
+     */
+    public static function matchParams($routeUrl, $matches){
+        $params = [];
+        $routeUrl = explode('/', $routeUrl);
+        foreach ($routeUrl as $key => $value) {
+            if (preg_match('#\[([a-z]+)\]#', $value, $match)) {
+                $params[$match[1]] = $matches[$key];
+            }
+        }
+        return $params;
     }
 }

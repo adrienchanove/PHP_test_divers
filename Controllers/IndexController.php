@@ -32,4 +32,14 @@ class IndexController
         // include view
         view('about');
     }
+
+    /**
+     * Page de test
+     */
+    public function test( $params ){
+        // include view
+        view('test', ['params' => $params]);
+
+
+    }
 }
