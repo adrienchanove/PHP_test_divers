@@ -1,10 +1,10 @@
 <?php
 class Message implements Model
 {
-    public $id;
-    public $sender_id;
-    public $receiver_id;
-    public $message;
+    private $id;
+    private $sender_id;
+    private $receiver_id;
+    private $message;
 
     /**
      * Message constructor.
@@ -163,5 +163,20 @@ class Message implements Model
         return $users;
     }
 
+    /**
+     * Getter
+     */
+    public function __get($name)
+    {
+        return $this->$name;
+    }
+
+    /**
+     * Setter
+     */
+    public function __set($name, $value)
+    {
+        $this->$name = $value;
+    }
 
 }
