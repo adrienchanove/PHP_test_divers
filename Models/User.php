@@ -5,10 +5,10 @@
  */
 class User implements Model
 {
-    public $id;
-    public $username;
-    public $password;
-    public $group_id;
+    private $id;
+    private $username;
+    private $password;
+    private $group_id;
 
     /**
      * User constructor.
@@ -153,5 +153,32 @@ class User implements Model
         $stmt = $bdd->execute($sql);
         $groupName = $stmt->fetchColumn();
         return $groupName;
+    }
+
+    /**
+     * Getter
+    */
+    public function __get($name)
+    {
+        if (property_exists($this, $name)) {
+            if ($name == 'password') {
+                throw new Exception('You cannot access to password');
+            }
+            return $this->$name;
+        }
+    }
+
+    /**
+     * Setter
+     */
+    public function __set($name, $value)
+    {
+        if (property_exists($this, $name)) {
+            if ($name == 'password') {
+                $this->$name = password_hash($value, PASSWORD_DEFAULT);
+            } else {
+                $this->$name = $value;
+            }
+        }
     }
 }
