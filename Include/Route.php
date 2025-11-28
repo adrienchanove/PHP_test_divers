@@ -1,7 +1,7 @@
 <?php
 class Route
 {
-    private static $routes = array();
+    private static $routes = [];
 
     /**
      * Add a route to the routing table
